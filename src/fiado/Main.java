@@ -1,35 +1,39 @@
+package fiado;
+
 import java.util.Scanner;
 
-public class Fiado {
+public class Main {
 	public static void main(String[] args) {
-		int fiados[] = new int[10];
 		
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Informe o nome do cliente: ");
 		String nome = scanner.nextLine();
-		
+		System.out.println("Informe o telefone do cliente: ");
+		String telefone = scanner.nextLine();
+		Cliente cliente = new Cliente(nome, telefone);
 		
 		System.out.println("Informe o valor da compra: ");
 		int valor = Integer.valueOf(scanner.nextLine());
-		int i = 0;
+		
 		while (valor != -1) {
 			if (valor > 0) {
-				fiados[i] = valor;
+				cliente.registrarFiado(valor);
 			} else {
 				System.out.println("Valor inválido, tente novamente");
 			}
 			
 			System.out.println("Informe o valor da próxima compra (-1 para cancelar): ");
 			valor = Integer.valueOf(scanner.nextLine());
-			i++;
 		}
 		
-		int total = somaForEach(fiados);
+		int total = cliente.getFiados();
 		
 		if (total > 100) {
-			System.out.println(nome + " gastou: " + total + " ==> ganhou brinde!!");			
+			System.out.println("Cliente: " + cliente.getNome() + "\nTelefone: " 
+					+ cliente.getTelefone() + "\ngastou: " + total + " reais" + " ==> ganhou brinde!!");
 		} else {
-			System.out.println(nome + " gastou: " + total);
+			System.out.println("Cliente: " + cliente.getNome() + "\nTelefone: " 
+					+ cliente.getTelefone() + "\ngastou: " + total + " reais");
 		}
 		
 		scanner.close();
